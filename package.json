@@ -1,6 +1,6 @@
 {
-  "name": "@truongpxc/react-masked-mentions",
-  "version": "1.0.0",
+  "name": "react-masked-mentions",
+  "version": "0.1.0",
   "description": "React Mentions",
   "keywords": [
     "react",
