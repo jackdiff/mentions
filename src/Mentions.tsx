@@ -49,7 +49,12 @@ export interface MentionsProps extends BaseTextareaAttrs {
   filterOption?: false | typeof defaultFilterOption;
   validateSearch?: typeof defaultValidateSearch;
   onChange?: (text: string) => void;
-  onSelect?: (option: OptionProps, prefix: string) => void;
+  onSelect?: (
+    option: OptionProps,
+    prefix: string,
+    startLocation: number,
+    endLocation: number,
+  ) => void;
   onSearch?: (text: string, prefix: string) => void;
   onFocus?: React.FocusEventHandler<HTMLTextAreaElement>;
   onBlur?: React.FocusEventHandler<HTMLTextAreaElement>;
@@ -281,7 +286,12 @@ const InternalMentions = forwardRef<MentionsRef, MentionsProps>(
         setInputSelection(getTextArea(), selectionLocation);
       });
 
-      onSelect?.(option, mergedMeasurePrefix);
+      onSelect?.(
+        option,
+        mergedMeasurePrefix,
+        getTextArea()?.selectionStart,
+        selectionLocation - 1,
+      );
     };
 
     // ============================= KeyEvent =============================
