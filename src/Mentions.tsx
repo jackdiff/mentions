@@ -52,6 +52,7 @@ export interface MentionsProps extends BaseTextareaAttrs {
   onSelect?: (
     option: OptionProps,
     prefix: string,
+    value: string,
     startLocation: number,
     endLocation: number,
   ) => void;
@@ -288,6 +289,7 @@ const InternalMentions = forwardRef<MentionsRef, MentionsProps>(
 
       onSelect?.(
         option,
+        text,
         mergedMeasurePrefix,
         getTextArea()?.selectionStart,
         selectionLocation - 1,
