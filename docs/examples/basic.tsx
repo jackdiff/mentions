@@ -1,5 +1,5 @@
 import React from 'react';
-import Mentions from 'rc-mentions';
+import Mentions from 'react-masked-mentions';
 import '../../assets/index.less';
 
 const onSelect = (option, prefix) => {
@@ -22,6 +22,7 @@ export default () => (
     onSelect={onSelect}
     onFocus={onFocus}
     onBlur={onBlur}
+    onChange={(val, e) => console.log('=', val, e)}
     options={[
       {
         value: 'light',

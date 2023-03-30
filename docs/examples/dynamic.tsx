@@ -1,5 +1,5 @@
 import React from 'react';
-import Mentions from 'rc-mentions';
+import Mentions from 'react-masked-mentions';
 import '../../assets/index.less';
 import './dynamic.less';
 

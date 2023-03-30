@@ -48,7 +48,10 @@ export interface MentionsProps extends BaseTextareaAttrs {
   value?: string;
   filterOption?: false | typeof defaultFilterOption;
   validateSearch?: typeof defaultValidateSearch;
-  onChange?: (text: string) => void;
+  onChange?: (
+    text: string,
+    event: React.ChangeEvent<HTMLTextAreaElement> | null,
+  ) => void;
   onSelect?: (
     option: OptionProps,
     prefix: string,
@@ -261,15 +264,21 @@ const InternalMentions = forwardRef<MentionsRef, MentionsProps>(
     };
 
     // ============================== Change ==============================
-    const triggerChange = (nextValue: string) => {
+    const triggerChange = (
+      nextValue: string,
+      ev: React.ChangeEvent<HTMLTextAreaElement> | null,
+    ) => {
       setMergedValue(nextValue);
-      onChange?.(nextValue);
+      onChange?.(nextValue, ev);
     };
 
-    const onInternalChange: React.ChangeEventHandler<HTMLTextAreaElement> = ({
-      target: { value: nextValue },
-    }) => {
-      triggerChange(nextValue);
+    const onInternalChange: React.ChangeEventHandler<
+      HTMLTextAreaElement
+    > = ev => {
+      const {
+        target: { value: nextValue },
+      } = ev;
+      triggerChange(nextValue, ev);
     };
 
     const selectOption = (option: OptionProps) => {
@@ -281,7 +290,7 @@ const InternalMentions = forwardRef<MentionsRef, MentionsProps>(
         selectionStart: getTextArea()?.selectionStart,
         split,
       });
-      triggerChange(text);
+      triggerChange(text, null);
       stopMeasure(() => {
         // We need restore the selection position
         setInputSelection(getTextArea(), selectionLocation);
