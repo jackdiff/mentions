@@ -296,11 +296,14 @@ const InternalMentions = forwardRef<MentionsRef, MentionsProps>(
         setInputSelection(getTextArea(), selectionLocation);
       });
 
+      const queryLength =
+        getTextArea()?.selectionStart - measureLocation - prefix.length;
+
       onSelect?.(
         option,
         text,
         mergedMeasurePrefix,
-        getTextArea()?.selectionStart,
+        getTextArea()?.selectionStart - queryLength,
         selectionLocation - 1,
       );
     };
