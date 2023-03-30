@@ -58,6 +58,7 @@ export interface MentionsProps extends BaseTextareaAttrs {
     value: string,
     startLocation: number,
     endLocation: number,
+    queryLength: number,
   ) => void;
   onSearch?: (text: string, prefix: string) => void;
   onFocus?: React.FocusEventHandler<HTMLTextAreaElement>;
@@ -305,6 +306,7 @@ const InternalMentions = forwardRef<MentionsRef, MentionsProps>(
         mergedMeasurePrefix,
         getTextArea()?.selectionStart - queryLength,
         selectionLocation - 1,
+        queryLength,
       );
     };
 
