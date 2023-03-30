@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkreact_masked_mentions=self.webpackChunkreact_masked_mentions||[]).push([[9],{65149:function(i,n,e){e.r(n),e.d(n,{default:function(){return r}});var a=e(14570),m=e(67294),o=function(){var s=(0,a.UO)(),d=s.id,u=(0,a.WF)(),c=u.demos,f=c[d]||{},t=f.component;return t&&(0,m.createElement)(t)},r=o}}]);
