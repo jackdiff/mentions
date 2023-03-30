@@ -105,6 +105,10 @@ export function replaceWithMeasure(text: string, measureConfig: MeasureConfig) {
   return {
     text: `${connectedStartText}${restText}`,
     selectionLocation: connectedStartText.length,
+    query: targetText.slice(
+      0,
+      selectionStart - measureLocation - prefix.length,
+    ),
   };
 }
 

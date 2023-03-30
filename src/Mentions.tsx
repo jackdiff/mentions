@@ -58,7 +58,7 @@ export interface MentionsProps extends BaseTextareaAttrs {
     value: string,
     startLocation: number,
     endLocation: number,
-    queryLength: number,
+    query: string,
   ) => void;
   onSearch?: (text: string, prefix: string) => void;
   onFocus?: React.FocusEventHandler<HTMLTextAreaElement>;
@@ -284,29 +284,30 @@ const InternalMentions = forwardRef<MentionsRef, MentionsProps>(
 
     const selectOption = (option: OptionProps) => {
       const { value: mentionValue = '' } = option;
-      const { text, selectionLocation } = replaceWithMeasure(mergedValue, {
-        measureLocation: mergedMeasureLocation,
-        targetText: mentionValue,
-        prefix: mergedMeasurePrefix,
-        selectionStart: getTextArea()?.selectionStart,
-        split,
-      });
+      const { text, selectionLocation, query } = replaceWithMeasure(
+        mergedValue,
+        {
+          measureLocation: mergedMeasureLocation,
+          targetText: mentionValue,
+          prefix: mergedMeasurePrefix,
+          selectionStart: getTextArea()?.selectionStart,
+          split,
+        },
+      );
+
       triggerChange(text, null);
       stopMeasure(() => {
         // We need restore the selection position
         setInputSelection(getTextArea(), selectionLocation);
       });
 
-      const queryLength =
-        getTextArea()?.selectionStart - mergedMeasureLocation - prefix.length;
-
       onSelect?.(
         option,
         text,
         mergedMeasurePrefix,
-        getTextArea()?.selectionStart - queryLength,
+        getTextArea()?.selectionStart,
         selectionLocation - 1,
-        queryLength,
+        query,
       );
     };
 
