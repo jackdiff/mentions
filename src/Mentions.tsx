@@ -297,7 +297,7 @@ const InternalMentions = forwardRef<MentionsRef, MentionsProps>(
       });
 
       const queryLength =
-        getTextArea()?.selectionStart - measureLocation - prefix.length;
+        getTextArea()?.selectionStart - mergedMeasureLocation - prefix.length;
 
       onSelect?.(
         option,
