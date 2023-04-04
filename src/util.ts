@@ -78,17 +78,18 @@ export function replaceWithMeasure(text: string, measureConfig: MeasureConfig) {
   const { measureLocation, prefix, targetText, selectionStart, split } =
     measureConfig;
 
+  let prefixBefore = 0;
   // Before text will append one space if have other text
   let beforeMeasureText = text.slice(0, measureLocation);
   if (beforeMeasureText[beforeMeasureText.length - split.length] === split) {
+    prefixBefore = 1;
     beforeMeasureText = beforeMeasureText.slice(
       0,
       beforeMeasureText.length - split.length,
     );
   }
-  let prefixBefore = false;
   if (beforeMeasureText) {
-    prefixBefore = true;
+    if (prefixBefore === 0) prefixBefore = 2;
     beforeMeasureText = `${beforeMeasureText}${split}`;
   }
 
@@ -111,7 +112,7 @@ export function replaceWithMeasure(text: string, measureConfig: MeasureConfig) {
       0,
       selectionStart - measureLocation - prefix.length,
     ),
-    prefixBefore,
+    prefixBefore: prefixBefore === 2,
   };
 }
 
