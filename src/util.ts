@@ -86,7 +86,9 @@ export function replaceWithMeasure(text: string, measureConfig: MeasureConfig) {
       beforeMeasureText.length - split.length,
     );
   }
+  let prefixBefore = false;
   if (beforeMeasureText) {
+    prefixBefore = true;
     beforeMeasureText = `${beforeMeasureText}${split}`;
   }
 
@@ -109,6 +111,7 @@ export function replaceWithMeasure(text: string, measureConfig: MeasureConfig) {
       0,
       selectionStart - measureLocation - prefix.length,
     ),
+    prefixBefore,
   };
 }
 
